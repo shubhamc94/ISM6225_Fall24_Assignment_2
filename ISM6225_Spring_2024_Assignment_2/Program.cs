@@ -164,16 +164,29 @@ namespace Assignment_2
         // Question 8: Fibonacci Number
         public static int Fibonacci(int n)
         {
-            if (n == 0) return 0;
-            if (n == 1) return 1;
-            int a = 0, b = 1;
-            for (int i = 2; i <= n; i++)
+            try
             {
-                int temp = a + b;
-                a = b;
-                b = temp;
+                if (n < 0 || n > 30)
+                    throw new ArgumentException("n should be between 0 and 30");
+
+                if (n == 0) return 0;
+                if (n == 1) return 1;
+
+                int prev1 = 0, prev2 = 1, current = 0;
+                for (int i = 2; i <= n; i++)
+                {
+                    current = prev1 + prev2;
+                    prev1 = prev2;
+                    prev2 = current;
+                }
+                return current;
             }
-            return b;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return -1; // Return -1 in case of an error
+            }
         }
+
     }
 }
